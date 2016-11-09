@@ -1,0 +1,15 @@
+td.weekend {
+    color: red;
+}
+
+td.currentDay {
+    color: cyan;
+}
+
+td.anotherMonthColor {
+    color: orange;
+}
+
+td {
+    padding: 5px;
+}
