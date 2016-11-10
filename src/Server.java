@@ -1,6 +1,3 @@
-import calendar.interfaces.Calendar;
-import calendar.web.WebCalendar;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +7,7 @@ import java.net.Socket;
 /**
  * Created by employee on 11/9/16.
  */
-public class RunServer {
+public class Server {
 
     private static String header = "<!DOCTYPE html>\n" +
             "<head>\n" +
@@ -30,7 +27,14 @@ public class RunServer {
             "    padding: 5px;\n" +
             "}" +
             "input{margin : 10px; padding : 5px; border-radius : 5px; }" +
-            "input.button{}" +
+            "input[type=submit] {\n" +
+            "    padding:5px 15px; \n" +
+            "    background:#ccc; \n" +
+            "    border:0 none;\n" +
+            "    cursor:pointer;\n" +
+            "    -webkit-border-radius: 5px;\n" +
+            "    border-radius: 5px; \n" +
+            "}" +
             "</style>" +
             "</head>" +
             "<html>\n" +
@@ -53,9 +57,8 @@ public class RunServer {
             builder.append(header);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            reader.lines().forEach(System.out::println);
             try{
-                builder.append(new StringParser(reader).parse());
+                builder.append(new HtmlBody(getFullPath(reader)).getBody());
             }catch (NullPointerException e){
 
             }
@@ -65,6 +68,11 @@ public class RunServer {
             reader.close();
         }
     }
+
+    private static String getFullPath(BufferedReader reader) throws IOException {
+        return reader.readLine().split(" ")[1];
+    }
+
 
 
 }

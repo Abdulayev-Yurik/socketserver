@@ -1,34 +1,29 @@
 import calendar.interfaces.Calendar;
 import calendar.web.WebCalendar;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 /**
  * Created by employee on 11/10/16.
  */
-public class StringParser {
+public class HtmlBody
+{
+    private final String path;
 
-    private final BufferedReader reader;
-
-    public StringParser(BufferedReader reader) {
-        this.reader = reader;
+    public HtmlBody(String path) {
+        this.path = path;
     }
 
-
-    public String parse() throws IOException {
-        String parameters = reader.readLine().split(" ")[1];
-        System.out.println("\"" + parameters + "\"");
-        if (parameters.equals("/")) {
+    public String getBody() {
+        if (path.equals("/")) {
             return getView();
         } else {
-            return parseLink(parameters);
+            return parsePath(path);
         }
     }
 
-    private static String parseLink(String parameters) {
+    private String parsePath(String parameters) {
         if (parameters.contains("name")) {
             try {
                 return parseName(parameters);
@@ -38,10 +33,10 @@ public class StringParser {
         } else if (parameters.contains("calendar")) {
             return getCalendar();
         }
-        return "incorrect parameters 404";
+        return "incorrect parameters";
     }
 
-    private static String parseName(String parameters) throws UnsupportedEncodingException {
+    private String parseName(String parameters) throws UnsupportedEncodingException {
         int index = parameters.indexOf("=") + 1;
         String result = parameters.substring(index);
         result = result.replaceAll("\\+", " ");
@@ -49,18 +44,17 @@ public class StringParser {
                 URLDecoder.decode(result , "UTF-8"));
     }
 
-    private static String getCalendar() {
+    private String getCalendar() {
         Calendar calendar = new WebCalendar();
-        return new StringBuilder()
-                .append("<table>")
-                .append("<tr><a href=\"/\">Back</a></tr><br>")
-                .append(calendar.getCurrentMonthHeader())
-                .append(calendar.getWeekNames())
-                .append(calendar.getMonthValues())
-                .append("</table>").toString();
+        return "<table>" +
+                "<tr><a href=\"/\">Back</a></tr><br>" +
+                calendar.getCurrentMonthHeader() +
+                calendar.getWeekNames() +
+                calendar.getMonthValues() +
+                "</table>";
     }
 
-    private static String getView() {
+    private String getView() {
         return "<input type=\"submit\" value=\"view calendar\" onclick=\"window.location='calendar/';\" /> " +
                 "<form action=\"/\">" +
                 "<input type=\"text\" name=\"name\" placeholder=\"Enter your name\"/>" +
