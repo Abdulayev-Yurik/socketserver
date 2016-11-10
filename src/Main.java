@@ -1,3 +1,6 @@
+import app.CalendarImpl;
+import app.GreeterImpl;
+import app.HomePageImpl;
 import server.WebServer;
 import server.parsers.Parser;
 import server.routers.Router;
@@ -15,6 +18,10 @@ public class Main {
         Parser parser = new ParserImpl();
         Router router = new RouterImpl();
         WebServer server = new WebServer(8080, parser, router);
+
+        router.register("/greeter", GreeterImpl::new);
+        router.register("/home", HomePageImpl::new);
+        router.register("/calendar", CalendarImpl::new);
 
         server.start();
 

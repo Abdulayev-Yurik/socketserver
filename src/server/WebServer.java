@@ -3,7 +3,6 @@ package server;
 import server.parsers.Parser;
 import server.routers.Router;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,19 +22,20 @@ public class WebServer {
         this.router = router;
     }
 
-
     public void start() throws IOException {
         ServerSocket server = new ServerSocket(port);
+        System.out.println("server is running");
         while (true){
             Socket socket = server.accept();
 
             HttpRequest request = parser.parse(socket.getInputStream());
-            Handler handler = router.route(request);
+            if (!request.getPath().isEmpty()) {
+                String handler = router.dispatch(request);
 
-//            socket.getOutputStream().write(builder.toString().getBytes("UTF-8"));
+                socket.getOutputStream().write(handler.getBytes("UTF-8"));
+            }
+            socket.close();
         }
-
-
     }
 
     public void stop(){
