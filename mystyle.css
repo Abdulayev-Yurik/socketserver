@@ -1,12 +1,12 @@
-.weekend {
+td.weekend {
     color: red;
 }
 
-.currentDay {
+td.currentDay {
     color: cyan;
 }
 
-.anotherMonthColor {
+td.anotherMonthColor {
     color: orange;
 }
 
@@ -16,4 +16,5 @@ td {
 
 weekend{
     color: red;
+    border-color:#333
 }

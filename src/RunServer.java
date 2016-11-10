@@ -28,7 +28,10 @@ public class RunServer {
             "\n" +
             "td {\n" +
             "    padding: 5px;\n" +
-            "}</style>" +
+            "}" +
+            "input{margin : 10px; padding : 5px; border-radius : 5px; }" +
+            "input.button{}" +
+            "</style>" +
             "</head>" +
             "<html>\n" +
             "<body>";
