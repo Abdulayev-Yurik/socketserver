@@ -42,8 +42,6 @@ public class RunServer {
         System.out.println("server is running");
 
 
-
-
         String footer = "</body>\n" +
                 "</html>";
         while (true) {
@@ -53,13 +51,10 @@ public class RunServer {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 //            reader.lines().forEach(System.out::println);
+            try{
+                builder.append(new StringParser(reader).parse());
+            }catch (NullPointerException e){
 
-            String parameters = reader.readLine().split(" ")[1];
-            System.out.println("\"" + parameters + "\"");
-            if (parameters.equals("/")) {
-                builder.append(getView());
-            } else {
-                builder.append(parseLink(parameters));
             }
 
             builder.append(footer);
@@ -68,33 +63,5 @@ public class RunServer {
         }
     }
 
-    private static String parseLink(String parameters) {
-        if (parameters.contains("name")) {
-            return parseName(parameters);
-        } else if (parameters.contains("calendar")) {
-            return getCalendar();
-        }
-        return "incorrect parameters 404";
-    }
 
-    private static String parseName(String parameters) {
-        int index = parameters.indexOf("=") + 1;
-        String result = parameters.substring(index);
-        return "Hello " + (result.isEmpty() ? "world" : result);
-    }
-
-    private static String getCalendar() {
-        Calendar calendar = new WebCalendar();
-        return new StringBuilder().append("<table>").append(calendar.getCurrentMonthHeader())
-                .append(calendar.getWeekNames())
-                .append(calendar.getMonthValues())
-                .append("</table>").toString();
-    }
-
-    private static String getView() {
-        return "<input type=\"submit\" value=\"view calendar\" onclick=\"window.location='calendar/';\" /> " +
-                "<form action=\"/\">" +
-                "<input type=\"text\" name=\"name\" placeholder=\"Enter your name\"/>" +
-                "<input type=\"submit\" value=\"Send\"></form> ";
-    }
 }
