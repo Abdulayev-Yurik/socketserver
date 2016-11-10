@@ -16,7 +16,12 @@ public class HomePageImpl extends HtmlUtils implements Handler{
     @Override
     public String print(HttpRequest request) {
         return htmlHeader +
-                "<a href=\"/calendar/\"><input type=\"submit\" value=\"view calendar\" /></a> " +
+                "<form action=\"/calendar/\">" +
+                "<input type=\"text\" name=\"date\" placeholder=\"enter date 2016-12-30\" /><br>" +
+                "<input type=\"text\" name=\"custom_week\" placeholder=\"enter start week 3\" /><br>" +
+                "<input type=\"text\" name=\"weekends\" placeholder=\"enter weekends = 1,2,3\" /><br>" +
+                "<input type=\"submit\" value=\"view calendar\" />" +
+                "</form> " +
                 "<form action=\"/greeter/\">" +
                 "<input type=\"text\" name=\"name\" placeholder=\"Enter your name\"/>" +
                 "<input type=\"submit\" class=\"button\" value=\"Send\"></form> " +
