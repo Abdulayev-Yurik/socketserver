@@ -9,7 +9,7 @@ import java.net.Socket;
  */
 public class Server {
 
-    private static String header = "<!DOCTYPE html>\n" +
+    private String htmlHeader = "<!DOCTYPE html>\n" +
             "<head>\n" +
             "<style>td.weekend {\n" +
             "    color: red;\n" +
@@ -41,29 +41,24 @@ public class Server {
             "<body>";
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        runServer();
+        new Server().run();
     }
 
-    private static void runServer() throws IOException, InterruptedException {
+    private void run() throws IOException, InterruptedException {
         ServerSocket server = new ServerSocket(8080);
         System.out.println("server is running");
 
-
-        String footer = "</body>\n" +
+        String htmlFooter = "</body>\n" +
                 "</html>";
         while (true) {
             Socket socket = server.accept();
             StringBuilder builder = new StringBuilder();
-            builder.append(header);
+            builder.append(htmlHeader);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            try{
-                builder.append(new HtmlBody(getFullPath(reader)).getBody());
-            }catch (NullPointerException e){
+            builder.append(new HtmlBody(getFullPath(reader)).getBody());
 
-            }
-
-            builder.append(footer);
+            builder.append(htmlFooter);
             socket.getOutputStream().write(builder.toString().getBytes("UTF-8"));
             reader.close();
         }
@@ -72,7 +67,6 @@ public class Server {
     private static String getFullPath(BufferedReader reader) throws IOException {
         return reader.readLine().split(" ")[1];
     }
-
 
 
 }
