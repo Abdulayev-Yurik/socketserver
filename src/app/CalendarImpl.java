@@ -41,14 +41,14 @@ public class CalendarImpl implements Handler {
         }
         return HtmlUtils.htmlHeader +
                 "<table>" +
-                "<tr><a href=\"/home/\">Back</a></tr><br>" +
+                "<tr><a href=\"/home\">Back</a></tr><br>" +
                 calendar.getCurrentMonthHeader() +
                 calendar.getWeekNames() +
                 calendar.getMonthValues() +
                 "</table>" + HtmlUtils.htmlFooter;
     }
 
-    private static List<DayOfWeek> getWeekends(String weekends) {
+    private List<DayOfWeek> getWeekends(String weekends) {
         List<DayOfWeek> listWeekends = new ArrayList<>();
         if (weekends.isEmpty()) {
             return Arrays.asList(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);

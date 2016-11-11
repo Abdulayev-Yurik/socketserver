@@ -27,7 +27,7 @@ public class GreeterImpl extends HtmlUtils implements Handler {
         } catch (UnsupportedEncodingException e) {
         }
 
-        return htmlHeader + ("<tr><a href=\"/home/\">Back</a></tr><br>") + "Hello " + result + htmlFooter;
+        return htmlHeader + ("<tr><a href=\"/home\">Back</a></tr><br>") + "Hello " + result + htmlFooter;
     }
 
 

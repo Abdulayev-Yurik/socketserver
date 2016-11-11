@@ -21,7 +21,6 @@ public class ParserImpl implements Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

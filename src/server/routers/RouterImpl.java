@@ -26,7 +26,7 @@ public class RouterImpl implements Router {
         try {
             handler = routes.get(httpRequest.getPath()).apply(httpRequest);
         }catch (NullPointerException e){
-            handler = new PageError(404, httpRequest.getPath());
+            handler = new PageError(404);
         }
         return handler.print(httpRequest);
     }

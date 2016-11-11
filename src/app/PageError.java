@@ -10,11 +10,9 @@ import server.HttpRequest;
 public class PageError extends HtmlUtils implements Handler {
 
     private final int codeError;
-    private final String path;
 
-    public PageError(int codeError, String path) {
+    public PageError(int codeError) {
         this.codeError = codeError;
-        this.path = path;
     }
 
     @Override

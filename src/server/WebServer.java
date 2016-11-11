@@ -24,7 +24,7 @@ public class WebServer {
 
     public void start() throws IOException {
         ServerSocket server = new ServerSocket(port);
-        System.out.println("server is running");
+        System.out.println("server is running " + port);
         while (true){
             Socket socket = server.accept();
 
