@@ -1,4 +1,4 @@
-package server.routers;
+package server;
 
 import server.Handler;
 import server.HttpRequest;
@@ -12,5 +12,5 @@ public interface Router {
 
     void register(String path, Function<HttpRequest, Handler> handlerFactory);
 
-    String dispatch(HttpRequest httpRequest);
+    String getResponse(HttpRequest httpRequest);
 }

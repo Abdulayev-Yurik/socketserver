@@ -1,8 +1,5 @@
 package server;
 
-import server.parsers.Parser;
-import server.routers.Router;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -30,7 +27,7 @@ public class WebServer {
 
             HttpRequest request = parser.parse(socket.getInputStream());
             if (!request.getPath().isEmpty()) {
-                String dispatch = router.dispatch(request);
+                String dispatch = router.getResponse(request);
 
                 socket.getOutputStream().write(dispatch.getBytes("UTF-8"));
             }

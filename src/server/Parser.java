@@ -1,4 +1,4 @@
-package server.parsers;
+package server;
 
 import server.HttpRequest;
 

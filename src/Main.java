@@ -2,10 +2,10 @@ import app.CalendarImpl;
 import app.GreeterImpl;
 import app.HomePageImpl;
 import server.WebServer;
-import server.parsers.Parser;
-import server.routers.Router;
-import server.parsers.ParserImpl;
-import server.routers.RouterImpl;
+import server.Parser;
+import server.Router;
+import server.impl.ParserImpl;
+import server.impl.RouterImpl;
 
 import java.io.IOException;
 

@@ -1,6 +1,7 @@
-package server.parsers;
+package server.impl;
 
 import server.HttpRequest;
+import server.Parser;
 
 import java.io.*;
 import java.net.URLDecoder;

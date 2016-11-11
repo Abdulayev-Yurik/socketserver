@@ -1,9 +1,9 @@
-package server.routers;
+package server.impl;
 
 import app.HomePageImpl;
-import app.PageError;
 import server.Handler;
 import server.HttpRequest;
+import server.Router;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.function.Function;
  */
 public class RouterImpl implements Router {
 
-    private Map<String, Function<HttpRequest, Handler>> routes = new HashMap<>();
+    public Map<String, Function<HttpRequest, Handler>> routes = new HashMap<>();
 
     @Override
     public void register(String path, Function<HttpRequest, Handler> handlerFactory) {
@@ -22,7 +22,7 @@ public class RouterImpl implements Router {
     }
 
     @Override
-    public String dispatch(HttpRequest httpRequest) {
+    public String getResponse(HttpRequest httpRequest) {
         Handler handler;
         if (routes.containsKey(httpRequest.getPath())){
             handler = routes.get(httpRequest.getPath()).apply(httpRequest);
