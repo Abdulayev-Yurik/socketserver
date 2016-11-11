@@ -18,7 +18,7 @@ public class ParserImpl implements Parser {
         try {
             String fullPath = reader.readLine().split(" ")[1];
             return new HttpRequest(getPath(fullPath), getParameters(fullPath));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

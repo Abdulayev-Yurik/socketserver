@@ -30,9 +30,9 @@ public class WebServer {
 
             HttpRequest request = parser.parse(socket.getInputStream());
             if (!request.getPath().isEmpty()) {
-                String handler = router.dispatch(request);
+                String dispatch = router.dispatch(request);
 
-                socket.getOutputStream().write(handler.getBytes("UTF-8"));
+                socket.getOutputStream().write(dispatch.getBytes("UTF-8"));
             }
             socket.close();
         }

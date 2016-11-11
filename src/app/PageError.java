@@ -18,7 +18,7 @@ public class PageError extends HtmlUtils implements Handler {
     @Override
     public String print(HttpRequest request) {
         return htmlHeader +
-                "<H1>This site can’t be reached" + codeError + "</H1><br>"  +
+                "<H1>This site can’t be reached " + codeError + "</H1><br>"  +
                 "http://greater.local:8080" + request.getPath() + " server DNS address could not be found." +
                 htmlFooter;
     }

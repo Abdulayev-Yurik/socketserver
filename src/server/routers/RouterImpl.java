@@ -1,5 +1,6 @@
 package server.routers;
 
+import app.HomePageImpl;
 import app.PageError;
 import server.Handler;
 import server.HttpRequest;
@@ -23,10 +24,10 @@ public class RouterImpl implements Router {
     @Override
     public String dispatch(HttpRequest httpRequest) {
         Handler handler;
-        try {
+        if (routes.containsKey(httpRequest.getPath())){
             handler = routes.get(httpRequest.getPath()).apply(httpRequest);
-        }catch (NullPointerException e){
-            handler = new PageError(404);
+        }else {
+            handler = new HomePageImpl(httpRequest);
         }
         return handler.print(httpRequest);
     }

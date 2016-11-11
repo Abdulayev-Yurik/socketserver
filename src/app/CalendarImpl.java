@@ -27,11 +27,7 @@ public class CalendarImpl implements Handler {
 
     @Override
     public String print(HttpRequest request) {
-
-        System.out.println(request.getPath());
-
         Calendar calendar;
-
         try {
             calendar = new WebCalendar(getDate(request.getParameters().get("date")),
                     getStartDay(request.getParameters().get("custom_week")),
